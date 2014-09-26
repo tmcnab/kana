@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kana</title>
+        <link rel="stylesheet" href="assets/bootswatch/simplex/bootstrap.min.css">
+        <link rel="stylesheet" href="application/application.css">
+        <script>var app = app || {};</script>
+    </head>
+    <body>
+        <main>
+            <p class="-display">&nbsp;</p>
+            <form>
+                <input class="form-control input-lg -answer" type="text">
+            </form>
+            <div class="btn-group -buttons">
+                <button type="button" class="btn btn-default -speak">Speak</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target=".-info">Info</button>
+                <button type="button" class="btn btn-default -skip">Skip</button>
+            </div>
+        </main>
+
+        <div class="modal fade -info" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <header class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Kana</h4>
+                    </header>
+                    <section class="modal-body">
+                        <p>This is the info.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/jquery/dist/jquery.min.js"></script>
+        <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="application/corpus.js"></script>
+        <script src="application/application.js"></script>
+        <script>$(app.init());</script>
+    </body>
+</html>

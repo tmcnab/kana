@@ -1,0 +1,20 @@
+main {
+    text-align: center;
+    margin-top: 15%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.-answer {
+    text-align:center;
+    font-size: 3rem;
+}
+
+.-display {
+    font-size: 4rem;
+}
+
+.-buttons {
+    margin-top: 2rem;
+}
