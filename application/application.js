@@ -71,7 +71,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
         $('.-skip').on('click', selectNewWord);
 
-        if (!speechSynthesis) {
+        if (!(speechSynthesis && SpeechSynthesisUtterance)) {
             $('.-speak')
                 .attr('disabled', 'disabled')
                 .tooltip({
