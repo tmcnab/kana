@@ -49,7 +49,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
     function playSpeech () {
         log('app::playSpeech()');
 
-        if (speechSynthesis) {
+        if (window.speechSynthesis && window.SpeechSynthesisUtterance) {
             var utterance = new SpeechSynthesisUtterance();
             utterance.lang = 'ja';
             utterance.text = currentWord;
@@ -71,7 +71,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
         $('.-skip').on('click', selectNewWord);
 
-        if (!(speechSynthesis && window.SpeechSynthesisUtterance)) {
+        if (!(window.speechSynthesis && window.SpeechSynthesisUtterance)) {
             $('.-speak')
                 .attr('disabled', 'disabled')
                 .tooltip({
