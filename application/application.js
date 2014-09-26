@@ -7,6 +7,31 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
     var currentWord = " ";
     var currentIndex = 0;
     var input = $('input.-answer');
+    var chart = null;
+    var data = {
+        labels:['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''],
+        datasets: [{
+            fillColor: "rgba(119,119,119,0.5)",
+            data: []
+        }]
+    };
+
+    function updateChart() {
+        data.datasets.data = [];
+
+        for (var i = 0; i < 31; i++) {
+            data.datasets[0].data.push(localStorage.getItem(i));
+        }
+
+        chart = new Chart($("#myChart").get(0).getContext("2d")).Bar(data, {
+            animation: false,
+            scaleShowGridLines: false,
+            barShowStroke: false,
+            barValueSpacing: 0,
+            barDatasetSpacing: 0,
+            scaleShowLabels: false
+        });
+    }
 
     function log () {
         if (location.hostname === 'localhost') {
@@ -18,11 +43,18 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
         log('app::checkAnswer()');
 
         if (input[0].value === currentWord) {
+            var key = (new Date()).getDate();
+            var points = parseInt(window.localStorage.getItem(key) || 0) + 1;
+            window.localStorage.setItem(key, points);
+
+            updateChart();
+
             input.prop('disabled', true);
 
             display.fadeOut('fast', function () {
                 display.text(self.corpus[currentIndex].meaning);
                 playSpeech();
+
                 display.fadeIn('fast', function () {
                     setTimeout(function () {
                         selectNewWord();
@@ -61,6 +93,12 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
     self.init = function () {
         log('app::init()');
 
+        for (var i = 0; i < 31; i++) {
+            window.localStorage.setItem(i, window.localStorage.getItem(i) || 0);
+        }
+
+        updateChart();
+
         input.blur(function () { input.focus(); })
             .focus();
 
@@ -94,6 +132,8 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
                 }
             }
         });
+
+
     };
 
 })(app || {}, $);
