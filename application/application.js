@@ -22,8 +22,6 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
             var points = parseInt(window.localStorage.getItem(key) || 0) + 1;
             window.localStorage.setItem(key, points);
 
-            updateChart();
-
             input.prop('disabled', true);
 
             display.fadeOut('fast', function () {
