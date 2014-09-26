@@ -18,3 +18,12 @@ main {
 .-buttons {
     margin-top: 2rem;
 }
+
+.modal-body > table {
+    width: 100%;
+}
+
+.modal-body > table td:first-child {
+    text-align: right;
+    padding-right: 1rem;
+}

@@ -1,3 +1,5 @@
+$.fn.modal.Constructor.prototype.enforceFocus = function () {};
+
 (function (self, $) {
 
     // Private Data
@@ -16,16 +18,11 @@
         log('app::checkAnswer()');
 
         if (input[0].value === currentWord) {
-
             input.prop('disabled', true);
-            var evt = jQuery.Event('keypress');
-            evt.which = 13;
-            evt.keyCode = 13;
-            input.trigger(evt);
-
 
             display.fadeOut('fast', function () {
                 display.text(self.corpus[currentIndex].meaning);
+                playSpeech();
                 display.fadeIn('fast', function () {
                     setTimeout(function () {
                         selectNewWord();
@@ -52,11 +49,13 @@
     function playSpeech () {
         log('app::playSpeech()');
 
-        var utterance = new SpeechSynthesisUtterance();
-        utterance.lang = 'ja';
-        utterance.text = currentWord;
-        utterance.rate = 0.1;
-        speechSynthesis.speak(utterance);
+        if (speechSynthesis) {
+            var utterance = new SpeechSynthesisUtterance();
+            utterance.lang = 'ja';
+            utterance.text = currentWord;
+            utterance.rate = 0.1;
+            speechSynthesis.speak(utterance);
+        }
     }
 
     self.init = function () {
