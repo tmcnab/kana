@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Kana</title>
         <link rel="stylesheet" href="assets/bootswatch/simplex/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/cssplot/build/cssplot.full.css">
         <link rel="stylesheet" href="application/application.css">
         <script>var app = app || {};</script>
     </head>
@@ -20,7 +21,10 @@
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target=".-info">Info</button>
                 <button type="button" class="btn btn-default -skip">Skip</button>
             </div>
-            <canvas id="myChart" width="500" height="100"></canvas>
+            <section class="bar-chart">
+                <ul id="chart" class="plot-container">
+                </ul>
+            </section>
         </main>
 
         <div class="modal fade -info" tabindex="-1" role="dialog" aria-hidden="true" >
@@ -67,7 +71,6 @@
         </div>
 
         <script src="assets/jquery/dist/jquery.min.js"></script>
-        <script src="assets/chartjs/Chart.min.js"></script>
         <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="application/corpus.js"></script>
         <script src="application/application.js"></script>

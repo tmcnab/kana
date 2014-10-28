@@ -1,5 +1,10 @@
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
+Array.prototype.max = function () {
+    return Math.max.apply(Math, this);
+};
+
+
 (function (self, $) {
 
     // Private Data
@@ -31,6 +36,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
                 display.fadeIn('fast', function () {
                     setTimeout(function () {
                         selectNewWord();
+                        rebuildChart();
                         input.prop('disabled', false).focus();
                     }, 2000);
                 });
@@ -63,12 +69,34 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {};
         }
     }
 
+    function rebuildChart () {
+        "Rebuilds the chart underneath the input area.";
+
+        console.log('app::rebuildChart()');
+
+        var $chart = $('#chart');
+        $chart.children().remove();
+
+        var points = [];
+        for (var i = 0; i < 31; i++) {
+            points[i] = parseInt(window.localStorage.getItem(i) || 0);
+        }
+
+        var _maxScore_ = points.max() || 1;
+        points.forEach(function (p) {
+            var $li = $('<li>').attr('data-cp-size', Math.floor((p / _maxScore_) * 100));
+            $chart.append($li);
+        });
+    }
+
     self.init = function () {
         log('app::init()');
 
         for (var i = 0; i < 31; i++) {
             window.localStorage.setItem(i, window.localStorage.getItem(i) || 0);
         }
+
+        rebuildChart();
 
 
         input.blur(function () { input.focus(); })
